@@ -9,6 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".HabitActivity"></activity>
+        <activity
+            android:name=".HabitCreationActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_habit_creation"
+            android:theme="@style/FullscreenTheme" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"

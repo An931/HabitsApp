@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">HabitsApp</string>
     <string name="action_settings">Settings</string>
+
+    <string name="title_activity_habit_creation">HabitCreationActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="create_your_habit">Create\nyour\nhabit</string>
 </resources>
