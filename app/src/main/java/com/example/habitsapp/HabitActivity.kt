@@ -26,12 +26,13 @@ class HabitActivity : AppCompatActivity() {
             //create habit
 
             //название, описание, приоритет, тип, периодичность и цвет
-            intent.putExtra("name", nameEdit.text)
-            intent.putExtra("description", descriptionEdit.text)
-            intent.putExtra("priority", priorityEdit.text)
-            intent.putExtra("type", typeEdit.text)
+//            Log.d(TAG, nameEdit.text.toString())
+            intent.putExtra("name", nameEdit.text.toString())
+            intent.putExtra("description", descriptionEdit.text.toString())
+            intent.putExtra("priority", priorityEdit.text.toString())
+            intent.putExtra("type", typeEdit.text.toString())
             //intent.putExtra("periodicity", periodicityEdit.text)
-            intent.putExtra("color", colorEdit.text)
+            intent.putExtra("color", colorEdit.text.toString())
 
             startActivity(intent);
             Log.d(TAG, "Save")

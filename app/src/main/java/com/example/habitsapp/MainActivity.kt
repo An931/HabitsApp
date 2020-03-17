@@ -31,12 +31,12 @@ class MainActivity : AppCompatActivity() {
         if(intent.hasExtra("habitId")){
             val name = intent.getStringExtra("name")
             val description = intent.getStringExtra("description")
-            val priority = intent.getStringExtra("priority").toInt()
+            val priority = intent.getStringExtra("priority")
             val type = intent.getStringExtra("type")
             //val periodicity = intent.getStringExtra("periodicity")
             val color = intent.getStringExtra("color")
             //color and type (?????)
-            habits.add(Habit(name, description, priority, HabitType.Bad, Color.parseColor(color)))
+            habits.add(Habit(name, description, priority.toInt(), HabitType.Bad, Color.parseColor(color)))
         }
         habits.forEach { habitsLayout.addView(getHabitView(it)) }
 
