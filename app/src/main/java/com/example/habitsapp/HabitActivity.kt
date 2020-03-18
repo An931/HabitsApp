@@ -31,7 +31,7 @@ class HabitActivity : AppCompatActivity() {
             intent.putExtra("description", descriptionEdit.text.toString())
             intent.putExtra("priority", priorityEdit.text.toString())
             intent.putExtra("type", typeEdit.text.toString())
-            //intent.putExtra("periodicity", periodicityEdit.text)
+            intent.putExtra("periodicity", periodicityEdit.text.toString())
             intent.putExtra("color", colorEdit.text.toString())
 
             startActivity(intent);
