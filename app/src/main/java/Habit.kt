@@ -5,15 +5,17 @@ class Habit(
     var descriptor: String,
     var priority: Int,
     var type: HabitType,
-    //var periodicity: Periodicity,
+    var periodicity: String,
     var color: Int
 )
 //var h = Habit("","",0,"","","")
 //var t = h.
 //название, описание, приоритет, тип, периодичность, цвет
 
-enum class HabitType {
-    Good, Bad, Neutral
+enum class HabitType(type:String) {
+    Good("good"),
+    Bad("bad"),
+    Neutral("neutral")
 }
 
 //enum class Color(val rgb: String) {
