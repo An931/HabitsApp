@@ -7,7 +7,15 @@ import android.os.Handler
 import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
+import android.widget.RadioButton
+import kotlinx.android.synthetic.main.activity_habit.*
 import kotlinx.android.synthetic.main.activity_habit_creation.*
+import kotlinx.android.synthetic.main.activity_habit_creation.colorEdit
+import kotlinx.android.synthetic.main.activity_habit_creation.descriptionEdit
+import kotlinx.android.synthetic.main.activity_habit_creation.nameEdit
+import kotlinx.android.synthetic.main.activity_habit_creation.periodicityEdit
+import kotlinx.android.synthetic.main.activity_habit_creation.saveHabitButton
+import kotlinx.android.synthetic.main.activity_habit_creation.typeEdit
 
 
 class HabitActivity : AppCompatActivity() {
@@ -29,8 +37,9 @@ class HabitActivity : AppCompatActivity() {
 //            Log.d(TAG, nameEdit.text.toString())
             intent.putExtra("name", nameEdit.text.toString())
             intent.putExtra("description", descriptionEdit.text.toString())
-            intent.putExtra("priority", priorityEdit.text.toString())
-            intent.putExtra("type", typeEdit.text.toString())
+            intent.putExtra("priority", prioritySpinner.selectedItem.toString())
+            val type = findViewById<RadioButton>(typeRadioGroup.checkedRadioButtonId)
+            intent.putExtra("type", type.text)
             intent.putExtra("periodicity", periodicityEdit.text.toString())
             intent.putExtra("color", colorEdit.text.toString())
 

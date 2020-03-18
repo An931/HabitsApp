@@ -23,9 +23,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        createSpinner()
         fillDataBase()
-
-
 
         if (intent.hasExtra("habitId")) {
             val name = intent.getStringExtra("name")
@@ -51,6 +50,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent);
         }
         Log.d(TAG, "onCreate")
+    }
+
+    fun createSpinner(){
+
     }
 
     fun fillDataBase() {
