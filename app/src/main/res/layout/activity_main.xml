@@ -7,70 +7,30 @@
     android:background="@color/cardview_light_background"
     tools:context=".MainActivity">
 
-<!--    <LinearLayout-->
+<!--    <TextView-->
+<!--        android:id="@+id/fullscreen_content"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="match_parent"-->
-<!--        android:background="@color/colorPrimaryDark"/>-->
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_gravity="center">-->
-<!--        <LinearLayout-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:layout_gravity="center">-->
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:text="Name"/>-->
-<!--            <EditText-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:hint="enter your name"/>-->
-<!--        </LinearLayout>-->
-<!--    </LinearLayout>-->
-    <TextView
-        android:id="@+id/fullscreen_content"
+<!--        android:gravity="center"-->
+<!--        android:keepScreenOn="true"-->
+<!--        android:text="No habits"-->
+<!--        android:textColor="#33b5e5"-->
+<!--        android:textSize="50sp"-->
+<!--        android:textStyle="bold" />-->
+
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:keepScreenOn="true"
-        android:text="No habits"
-        android:textColor="#33b5e5"
-        android:textSize="50sp"
-        android:textStyle="bold" />
-    <LinearLayout
-        android:id="@+id/habitsLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/habitsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    </LinearLayout>
+        </LinearLayout>
 
-<!--    <com.google.android.material.appbar.AppBarLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:theme="@style/AppTheme.AppBarOverlay">-->
-
-<!--        <androidx.appcompat.widget.Toolbar-->
-<!--            android:id="@+id/toolbar"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="?attr/actionBarSize"-->
-<!--            android:background="@color/colorPrimaryDark"-->
-<!--            app:popupTheme="@style/AppTheme.PopupOverlay"-->
-<!--            app:title="@string/app_name"-->
-<!--             />-->
-<!--    </com.google.android.material.appbar.AppBarLayout>-->
-<!--    -->
-<!--<LinearLayout-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:gravity="center">-->
-
-
-<!--</LinearLayout>-->
-
+    </ScrollView>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

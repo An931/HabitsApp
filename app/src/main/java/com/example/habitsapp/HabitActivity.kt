@@ -24,27 +24,44 @@ class HabitActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_habit)
 
-//        if(intent.hasExtra("habitId")){
-//            //set texts
-//        }
+        if (intent.hasExtra("habitId")) {
+            nameEdit.setText(intent.getStringExtra("name"))
+            descriptionEdit.setText(intent.getStringExtra("description"))
 
-        saveHabitButton.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("habitId", 0) // !!!! не 0
-            //create habit
+            val spinnerItem = intent.getIntExtra("priority", 1) - 1
+            prioritySpinner.setSelection(spinnerItem)
 
-            //название, описание, приоритет, тип, периодичность и цвет
-//            Log.d(TAG, nameEdit.text.toString())
-            intent.putExtra("name", nameEdit.text.toString())
-            intent.putExtra("description", descriptionEdit.text.toString())
-            intent.putExtra("priority", prioritySpinner.selectedItem.toString())
-            val type = findViewById<RadioButton>(typeRadioGroup.checkedRadioButtonId)
-            intent.putExtra("type", type.text)
-            intent.putExtra("periodicity", periodicityEdit.text.toString())
-            intent.putExtra("color", colorEdit.text.toString())
+            when (intent.getStringExtra("type")) {
+                "Good" -> radio_good.isChecked = true
+                "Neutral" -> radio_neutral.isChecked = true
+                "Bad" -> radio_bad.isChecked = true
+            }
+            periodicityEdit.setText(intent.getStringExtra("periodicity"))
+            colorEdit.setText(intent.getStringExtra("color"))
+            habitId.setText(intent.getLongExtra("habitId", -1).toString())
+        }
 
-            startActivity(intent);
-            Log.d(TAG, "Save")
+        saveHabitButton.setOnClickListener {
+            if (!(nameEdit.text.isEmpty() || descriptionEdit.text.isEmpty()
+                        || periodicityEdit.text.isEmpty() || colorEdit.text.isEmpty())
+            ) {
+                val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("habitId", habitId.text)
+
+
+                //название, описание, приоритет, тип, периодичность и цвет
+                intent.putExtra("name", nameEdit.text.toString())
+                intent.putExtra("description", descriptionEdit.text.toString())
+                intent.putExtra("priority", prioritySpinner.selectedItem.toString())
+                val type = findViewById<RadioButton>(typeRadioGroup.checkedRadioButtonId)
+                intent.putExtra("type", type.text)
+                intent.putExtra("periodicity", periodicityEdit.text.toString())
+                intent.putExtra("color", colorEdit.text.toString())
+
+                startActivity(intent);
+                Log.d(TAG, "Save")
+            }
+
         }
         Log.d(TAG, "onCreate")
     }

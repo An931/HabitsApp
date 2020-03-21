@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 
-private val DB_VERSION = 1
+private val DB_VERSION = 2
 private val DB_NAME = "test"
 
 class DbOpenHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
@@ -28,7 +28,7 @@ class DbOpenHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, 
                 + PRIORITY + " INTEGER, "
                 + TYPE + " TEXT, "
                 + PERIODICITY + " TEXT, "
-                + COLOR + " INTEGER )")
+                + COLOR + " TEXT )")
 
     private val DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME
 
