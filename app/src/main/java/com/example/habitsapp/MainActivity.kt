@@ -17,7 +17,10 @@ import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.RadioButton
+import android.widget.TableLayout
 import android.widget.TextView
+import androidx.viewpager.widget.ViewPager
+import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_habit.*
 import kotlinx.android.synthetic.main.activity_habit_creation.*
 import kotlinx.android.synthetic.main.activity_habit_creation.colorEdit
@@ -36,6 +39,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         //fillDataBase()
+
+//        // Получаем ViewPager и устанавливаем в него адаптер
+//        ViewPager viewPager = findViewById(R.id.viewpager);
+//        viewPager.setAdapter(
+//            new SampleFragmentPagerAdapter(getSupportFragmentManager(), MainActivity.this));
+//
+//        // Передаём ViewPager в TabLayout
+//        TabLayout tabLayout = findViewById(R.id.sliding_tabs);
+//        tabLayout.setupWithViewPager(viewPager);
+
+        val vp = findViewById<ViewPager>(R.id.viewpager)
+        vp.adapter = HabitsFragmentPagerAdapter(supportFragmentManager, this)
+
+        val st = findViewById<TabLayout>(R.id.sliding_tabs)
+        st.setupWithViewPager(vp)
+
 
         if (intent.hasExtra("habitId")) {
             val id = intent.getStringExtra("habitId")
