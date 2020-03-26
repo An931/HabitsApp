@@ -64,12 +64,6 @@ enum class HabitType {
     Neutral,
 }
 
-//enum class Color(val rgb: String) {
-//    Red("f00"),
-//    Green("000"),
-//    Blue("000")
-//}
-
 enum class Periodicity {
     Hour, Day, Week, Month, Year
 } //change to times-per-smth

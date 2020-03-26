@@ -19,10 +19,6 @@ class HabitsPageFragment(val type: HabitType, val habits: List<Habit>) : Fragmen
 
 
     companion object {
-        //        fun newInstance(type: HabitType):HabitsPageFragment {
-//            Log.d("HabitsPageFragment", "newInstanse" )
-//            return HabitsPageFragment(type)
-//        }
         fun newInstance(
             type: HabitType,
             habits: List<Habit>
@@ -52,12 +48,12 @@ class HabitsPageFragment(val type: HabitType, val habits: List<Habit>) : Fragmen
         view.setBackgroundColor(Color.parseColor(color))
         val layout = view.findViewById<LinearLayout>(R.id.habitsLayout)
         habits.forEach {
-            layout.addView(
-                it.getView(
-                    context ?: MainActivity()
-                )
-            )
-        } ////MainActivity() ?????
+            val view = it.getView(context ?: MainActivity())
+//            view.setOnClickListener {
+//
+//            }
+            layout.addView(view)
+        }
 
         Log.d(TAG, "onCreateView")
         return view

@@ -27,8 +27,6 @@ class MainActivity : AppCompatActivity() {
     val TAG = "MainActivity"
     val dbOpenHelper = DbOpenHelper(this)
 
-//    private lateinit var drawer: DrawerLayout
-//    private lateinit var toggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,12 +59,6 @@ class MainActivity : AppCompatActivity() {
 //        val navigationView: NavigationView = findViewById(R.id.nav_view)
 //        navigationView.setNavigationItemSelectedListener(this)
 
-//        setSupportActionBar(toolbar_main)
-//        drawer_layout.addDrawerListener(drawerToggle)
-//
-//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-//        supportActionBar?.setHomeButtonEnabled(true)
-
         fab.setOnClickListener {
             Log.d(TAG, "toCreateButton")
             showHabitCreationFragment()
@@ -74,7 +66,6 @@ class MainActivity : AppCompatActivity() {
 //                .beginTransaction()
 //                .add(R.id.creationFragment, creationFragment, "crFragment")
 //                .commit()
-
         }
         Log.d(TAG, "onCreate")
     }
@@ -103,20 +94,6 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun fillDataBase() {
-
-//        dbWriter.delete(dbHelper.TABLE_NAME, "NAME=?", listOf<String>("n25").toTypedArray())
-        //dbWriter.delete(dbHelper.TABLE_NAME, null, null)
-
-//        val cv = ContentValues()
-//        cv.put(dbHelper.NAME, "n25")
-//        cv.put(dbHelper.DESCRIPTION, "des11")
-//        cv.put(dbHelper.PRIORITY, "5")
-//        cv.put(dbHelper.TYPE, "Bad")
-//        cv.put(dbHelper.PERIODICITY, 2)
-//        cv.put(dbHelper.COLOR, "cyan")
-//        dbWriter.insert(dbHelper.TABLE_NAME, null, cv)
-//        dbWriter.close()
-
         dbOpenHelper.addToDB(Habit("n1", "des", 3, HabitType.Good, "e", "black"))
         dbOpenHelper.addToDB(Habit("n2", "des", 6, HabitType.Bad, "e", "black"))
 
