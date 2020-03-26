@@ -18,7 +18,7 @@ class Habit(
 ){
     var id :Long = -1
 
-    fun getView(context: Context): LinearLayout {
+    fun getView(context: Context?): LinearLayout {
         val layout = LinearLayout(context)
         layout.setOrientation(LinearLayout.VERTICAL)
         val texts = listOf(

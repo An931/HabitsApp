@@ -1,11 +1,14 @@
 package com.example.habitsapp
 
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue.*
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -14,20 +17,24 @@ import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
+import kotlinx.android.synthetic.main.activity_main.*
 
-import kotlinx.android.synthetic.main.activity_main.fab
 import java.text.FieldPosition
 
 class MainActivity : AppCompatActivity() {
     val TAG = "MainActivity"
     val dbOpenHelper = DbOpenHelper(this)
 
+//    private lateinit var drawer: DrawerLayout
+//    private lateinit var toggle: ActionBarDrawerToggle
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        fillDataBase()
-        //dbOpenHelper.cleanDb()
+//        fillDataBase()
+//        dbOpenHelper.cleanDb()
 
         if (savedInstanceState == null) {
             val vp = findViewById<ViewPager>(R.id.viewpager)
@@ -41,74 +48,27 @@ class MainActivity : AppCompatActivity() {
             st.setupWithViewPager(vp)
         }
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar_main)
+        val toolbar: Toolbar = findViewById(R.id.toolbar_main)
         setSupportActionBar(toolbar)
 
         val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
 
-//        val toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         val toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.create_your_habit, R.string.create_your_habit)
         drawer.addDrawerListener(toggle)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
 
+//        val navigationView: NavigationView = findViewById(R.id.nav_view)
+//        navigationView.setNavigationItemSelectedListener(this)
 
-//        val t = "android:switcher:" + R.id.viewpager + ":" + 1
-//        val curF = supportFragmentManager.findFragmentByTag(t)
-//        val l = curF?.view?.findViewById<LinearLayout>(R.id.habitsLayout)
-//        val habits = dbOpenHelper.getAllHabits()
-//        habits.forEach { l?.addView(it.getView(this)) }
-
-//        val fs = supportFragmentManager.fragments
+//        setSupportActionBar(toolbar_main)
+//        drawer_layout.addDrawerListener(drawerToggle)
 //
-//        supportFragmentManager.fragments.forEach {
-//            val l = it.view?.findViewById<LinearLayout>(R.id.habitsLayout)
-//            val habits = dbOpenHelper.getAllHabits()
-//            habits.forEach { l?.addView(it.getView(this)) }
-//        }
-
-
-//        if (intent.hasExtra("habitId")) {
-//            val id = intent.getStringExtra("habitId")
-//            val name = intent.getStringExtra("name")
-//            val description = intent.getStringExtra("description")
-//            val priority = intent.getStringExtra("priority")
-//            val type = intent.getStringExtra("type")
-//            val periodicity = intent.getStringExtra("periodicity")
-//            val color = intent.getStringExtra("color")
-//            val h = Habit(
-//                name,
-//                description,
-//                priority.toInt(),
-//                HabitType.valueOf(type),
-//                periodicity,
-//                color
-//            )
-//            h.id = id.toLong()
-//            dbOpenHelper.addToDB(h)
-//        }
-
-
-//        val habits = dbOpenHelper.getAllHabits()
-//        var layout = findViewById<LinearLayout>(R.id.habitsLayout)
-//        habits.forEach { layout.addView(it.getView(this)) }
-
-
-//        val fs = supportFragmentManager.fragments
+//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//        supportActionBar?.setHomeButtonEnabled(true)
 
         fab.setOnClickListener {
             Log.d(TAG, "toCreateButton")
-//            val fs = supportFragmentManager.fragments
-
-//            val habits = dbOpenHelper.getAllHabits()
-//            setToFragment(0, habits.filter { it.type == HabitType.Good })
-//            setToFragment(1, habits.filter { it.type == HabitType.Bad })
-
-//            val intent = Intent(this, HabitActivity::class.java)
-//            startActivity(intent);
-
-//            val creationFragment = HabitCreationFragment.newInstance()
-//            creationFragment.show(supportFragmentManager, "t")
             showHabitCreationFragment()
 //            supportFragmentManager
 //                .beginTransaction()
@@ -119,42 +79,30 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "onCreate")
     }
 
-    fun showHabitCreationFragment() {
-        val callback = object : HabitCreationCallback {
-            override fun onHabitSave(habit: Habit) {
-                dbOpenHelper.addToDB(habit)
-                Log.d("HabCreateFragment", "onHabSave")
-                //updateOther
-            }
+    val callback = object : HabitCreationCallback {
+        override fun onHabitSave(habit: Habit, context: Context?) {
+            dbOpenHelper.addToDB(habit)
+            Log.d("HabCreateFragment", "onHabSave")
+            //add to other
+            var tag =   "android:switcher:" + R.id.viewpager + ":"
+            if (habit.type == HabitType.Good)
+                tag += 0
+            else
+                tag += 1
+            val fragment =supportFragmentManager.findFragmentByTag(tag);
+            val l = fragment?.view?.findViewById<LinearLayout>(R.id.habitsLayout)
+            val v = habit.getView(context)
+            l?.addView(v, 0)
         }
+    }
+
+    fun showHabitCreationFragment() {
         val creationFragment = HabitCreationFragment.newInstance(callback)
         creationFragment.show(supportFragmentManager, "t")
     }
 
-//    override fun onStart() {
-//        super.onStart()
-//        Log.d(TAG, "onStart")
-//    }
-//
-//    override fun onResume() {
-//        val s = supportFragmentManager
-//        val fs1 = supportFragmentManager.fragments
-//
-//        super.onResume()
-//        val fs = supportFragmentManager.fragments
-//
-//        Log.d(TAG, "onResume")
-//
-//    }
 
-//    private fun setToFragment(position: Int, habits: List<Habit>) {
-//        val tag = "android:switcher:" + R.id.viewpager + ":" + position
-//        val fragment = supportFragmentManager.findFragmentByTag(tag)
-//        val layout = fragment?.view?.findViewById<LinearLayout>(R.id.habitsLayout)
-//        habits.forEach { layout?.addView(it.getView(this)) }
-//    }
-
-    fun fillDataBase() {
+    private fun fillDataBase() {
 
 //        dbWriter.delete(dbHelper.TABLE_NAME, "NAME=?", listOf<String>("n25").toTypedArray())
         //dbWriter.delete(dbHelper.TABLE_NAME, null, null)
