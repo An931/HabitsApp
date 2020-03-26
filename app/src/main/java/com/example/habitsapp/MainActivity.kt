@@ -9,6 +9,9 @@ import android.util.TypedValue.*
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
@@ -37,6 +40,17 @@ class MainActivity : AppCompatActivity() {
             val st = findViewById<TabLayout>(R.id.sliding_tabs)
             st.setupWithViewPager(vp)
         }
+
+        val toolbar = findViewById<Toolbar>(R.id.toolbar_main)
+        setSupportActionBar(toolbar)
+
+        val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
+
+//        val toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        val toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.create_your_habit, R.string.create_your_habit)
+        drawer.addDrawerListener(toggle)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
 
 
 //        val t = "android:switcher:" + R.id.viewpager + ":" + 1
