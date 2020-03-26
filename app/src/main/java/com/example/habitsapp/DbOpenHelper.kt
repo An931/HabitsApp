@@ -41,11 +41,7 @@ class DbOpenHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, 
 
     override fun onUpgrade(sqLiteDatabase: SQLiteDatabase, i: Int, i1: Int) {}
 
-    fun getHabits(type: HabitType){
-
-    }
-
-    fun getAllHabits():List<Habit>{
+    fun getAllHabits(): List<Habit> {
         val dbReader = readableDatabase
         val cur = dbReader.query(
             TABLE_NAME,
@@ -76,7 +72,7 @@ class DbOpenHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, 
         return habs
     }
 
-    fun addToDB(h: Habit){
+    fun addToDB(h: Habit) {
         val dbWriter = writableDatabase
         val cv = ContentValues()
         cv.put(NAME, h.name)
@@ -93,4 +89,7 @@ class DbOpenHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, 
         dbWriter.close()
     }
 
+    fun cleanDb(){
+        writableDatabase.delete(TABLE_NAME, null, null)
+    }
 }

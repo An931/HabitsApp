@@ -9,13 +9,14 @@ import androidx.fragment.app.FragmentPagerAdapter
 
 class HabitsFragmentPagerAdapter(
     fm: FragmentManager,
-    private val context: Context
+    private val context: Context,
+    private val habits: List<Habit>
 ) : FragmentPagerAdapter(fm) {
 
     val TAG = "HFPagerAdapter"
 
     val PAGE_COUNT = 2
-    private val tabTitles = arrayOf("Bad", "Good")
+    private val tabTitles = arrayOf("Good", "Bad")
 //    private val colors = mapOf("Bad" to "#ffe1da", "Good" to "#daffdd")
     private val types = mapOf("Bad" to HabitType.Bad, "Good" to HabitType.Good)
 
@@ -26,12 +27,11 @@ class HabitsFragmentPagerAdapter(
     override fun getItem(position: Int): Fragment {
         Log.d(TAG, "getItem")
         val type = types[tabTitles[position]]?: HabitType.Neutral
-        return HabitsPageFragment.newInstance(type)
-//        return HabitsPageFragment.newInstance(position + 1)
+        val filtered = habits.filter { it.type==type }
+        return HabitsPageFragment.newInstance(type, filtered)
     }
 
     override fun getPageTitle(position: Int): String {
-        // генерируем заголовок в зависимости от позиции
         return tabTitles[position]
     }
 }
