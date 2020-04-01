@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
 
-class HabitsFragmentPagerAdapter(fm: FragmentManager, private val context: Context) :
+class HabitsFragmentPagerAdapter(fm: FragmentManager, private val habitsModel: HabitsModel) :
     FragmentPagerAdapter(fm) {
 
     val TAG = "HFPagerAdapter"
@@ -23,7 +23,6 @@ class HabitsFragmentPagerAdapter(fm: FragmentManager, private val context: Conte
     override fun getItem(position: Int): Fragment {
         Log.d(TAG, "getItem")
         val type = types[tabTitles[position]] ?: HabitType.Neutral
-        val habitsModel = HabitsModel(context)
         return HabitsPageFragment.newInstance(habitsModel, type)
     }
 

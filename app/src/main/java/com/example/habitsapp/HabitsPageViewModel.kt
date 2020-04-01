@@ -3,6 +3,7 @@ package com.example.habitsapp
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.Observer
 
 class HabitsPageViewModel(private val habitsModel: HabitsModel, private val type: HabitType) :
     ViewModel() {
@@ -15,6 +16,12 @@ class HabitsPageViewModel(private val habitsModel: HabitsModel, private val type
 
     init {
         load()
+        habitsModel.habitsChanged.observeForever( Observer{
+            if (habitsModel.habitsChanged.value == true){
+                load()
+                habitsModel.habitsChanged.value = false
+            }
+        })
     }
 
     private fun load() {

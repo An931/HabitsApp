@@ -26,6 +26,7 @@ import java.text.FieldPosition
 class MainActivity : AppCompatActivity() {
     val TAG = "MainActivity"
     val dbOpenHelper = DbOpenHelper(this)
+    val habitsModel = HabitsModel(this)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             val vp = findViewById<ViewPager>(R.id.viewpager)
             vp.adapter = HabitsFragmentPagerAdapter(
                 supportFragmentManager,
-                this)
+                habitsModel)
 
             val st = findViewById<TabLayout>(R.id.sliding_tabs)
             st.setupWithViewPager(vp)
@@ -86,7 +87,7 @@ class MainActivity : AppCompatActivity() {
 ////    }
 
     fun showHabitCreationFragment() {
-        val creationFragment = HabitCreationFragment.newInstance(HabitsModel(this))
+        val creationFragment = HabitCreationFragment.newInstance(habitsModel)
         creationFragment.show(supportFragmentManager, "t")
     }
 

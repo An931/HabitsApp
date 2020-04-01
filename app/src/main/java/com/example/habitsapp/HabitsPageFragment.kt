@@ -73,7 +73,7 @@ class HabitsPageFragment(private val habitsModel: HabitsModel, val type: HabitTy
 //            view.setOnClickListener {
 //
 //            }
-                Log.d(TAG, "onViewCreated")
+//                Log.d(TAG, "onViewCreated")
                 layout.addView(view)
             }
         })

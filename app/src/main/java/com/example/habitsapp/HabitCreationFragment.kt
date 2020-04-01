@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.RadioButton
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.fragment_creation_habit.*
 import kotlinx.android.synthetic.main.fragment_creation_habit.descriptionEdit
 import kotlinx.android.synthetic.main.fragment_creation_habit.nameEdit
@@ -33,6 +35,16 @@ class HabitCreationFragment(private val habitsModel: HabitsModel, val habit: Hab
         fun newInstance(habitsModel: HabitsModel, habit: Habit):HabitCreationFragment {
             return HabitCreationFragment(habitsModel, habit)
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(this, object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return HabitCreationViewModel(habitsModel, habit) as T
+            }
+        }).get(HabitCreationViewModel::class.java)
+        Log.d("", "onCreate")
     }
 
 
