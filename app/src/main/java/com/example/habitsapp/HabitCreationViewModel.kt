@@ -20,8 +20,5 @@ class HabitCreationViewModel(
         mutableHabit.postValue(changingHabit)
     }
 
-    private fun save(h: Habit) = habitsModel.save(h)
-
-
-
+    fun save(habit: Habit) = habitsModel.save(habit)
 }

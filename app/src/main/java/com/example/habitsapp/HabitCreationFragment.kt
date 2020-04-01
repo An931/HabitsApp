@@ -98,7 +98,7 @@ class HabitCreationFragment(private val habitsModel: HabitsModel, val habit: Hab
                     color
                 )
                 habit.id = habitId.text.toString().toLong()
-                habitsModel.save(habit)
+                viewModel.save(habit)
                 dismiss()
             }
         }

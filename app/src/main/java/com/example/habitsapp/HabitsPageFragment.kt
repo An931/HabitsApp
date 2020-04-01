@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import kotlinx.android.synthetic.main.habits_page_fragment.*
 
 
 class HabitsPageFragment(private val habitsModel: HabitsModel, val type: HabitType) : Fragment() {
@@ -68,6 +69,7 @@ class HabitsPageFragment(private val habitsModel: HabitsModel, val type: HabitTy
 //        super.onViewCreated(view, savedInstanceState)
         val layout = view.findViewById<LinearLayout>(R.id.habitsLayout)
         viewModel.habits.observe(this, Observer { habits ->
+            layout.removeAllViews()
             habits?.forEach {
                 val view = it.getView(context ?: MainActivity())
 //            view.setOnClickListener {
@@ -77,6 +79,21 @@ class HabitsPageFragment(private val habitsModel: HabitsModel, val type: HabitTy
                 layout.addView(view)
             }
         })
+        search_button.setOnClickListener {
+            val sortBottomSheet = SortingFragment.newInstance(viewModel, habitsModel, type)
+            sortBottomSheet.show(fragmentManager, "")
+        }
+
+
+//        val transaction = getChildFragmentManager().beginTransaction()
+//        transaction.replace(R.id.sorting_fragment_container, sortBottomSheet).commit();
+//
+//        val sortBottomSheet = SortingFragment(habitsModel, type)
+//        val transaction = fragmentManager?.beginTransaction()
+//        transaction?.add(R.id.sorting_fragment_container, sortBottomSheet);
+//        transaction?.commit();
+
+
         Log.d(TAG, "onViewCreated")
     }
 }

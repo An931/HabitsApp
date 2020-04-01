@@ -20,6 +20,7 @@ class HabitsFragmentPagerAdapter(fm: FragmentManager, private val habitsModel: H
         return PAGE_COUNT
     }
 
+
     override fun getItem(position: Int): Fragment {
         Log.d(TAG, "getItem")
         val type = types[tabTitles[position]] ?: HabitType.Neutral

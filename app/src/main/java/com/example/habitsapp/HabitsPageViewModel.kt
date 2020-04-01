@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 class HabitsPageViewModel(private val habitsModel: HabitsModel, private val type: HabitType) :
     ViewModel() {
 
+
     private val mutableHabits: MutableLiveData<List<Habit>?> = MutableLiveData()
     //private val mutableIsDataLoading: MutableLiveData<Boolean?> = MutableLiveData()
 
@@ -32,6 +33,10 @@ class HabitsPageViewModel(private val habitsModel: HabitsModel, private val type
 //            mutableProfile.postValue(loadedProfile)
 //        }
         mutableHabits.postValue(habitsModel.getHabits(type))
+    }
+
+    fun changeSorting(nameStr: String, sorting: SortingParameter){
+        mutableHabits.postValue(habitsModel.getHabits(type, nameStr, sorting))
     }
 }
 //class ProfileViewModel(private val model: Model, private val profileId: String) : ViewModel() {

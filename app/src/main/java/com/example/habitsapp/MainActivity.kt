@@ -39,10 +39,18 @@ class MainActivity : AppCompatActivity() {
             val vp = findViewById<ViewPager>(R.id.viewpager)
             vp.adapter = HabitsFragmentPagerAdapter(
                 supportFragmentManager,
-                habitsModel)
+                habitsModel
+            )
 
             val st = findViewById<TabLayout>(R.id.sliding_tabs)
             st.setupWithViewPager(vp)
+
+
+//            val sortBottomSheet = SortingFragment(habitsModel, HabitType.Good)
+//            val transaction = getSupportFragmentManager().beginTransaction()
+//            transaction?.add(R.id.sfc, sortBottomSheet).commit()
+//            val sortBottomSheet = SortingFragment.newInstance(habitsModel, HabitType.Good)
+//            sortBottomSheet.show(getSupportFragmentManager(), "")
         }
 
         val toolbar: Toolbar = findViewById(R.id.toolbar_main)
@@ -50,13 +58,20 @@ class MainActivity : AppCompatActivity() {
 
         val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
 
-        val toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.create_your_habit, R.string.create_your_habit)
+        val toggle = ActionBarDrawerToggle(
+            this,
+            drawer,
+            toolbar,
+            R.string.create_your_habit,
+            R.string.create_your_habit
+        )
         drawer.addDrawerListener(toggle)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
 
 //        val navigationView: NavigationView = findViewById(R.id.nav_view)
 //        navigationView.setNavigationItemSelectedListener(this)
+
 
         fab.setOnClickListener {
             Log.d(TAG, "toCreateButton")
@@ -66,6 +81,13 @@ class MainActivity : AppCompatActivity() {
 //                .add(R.id.creationFragment, creationFragment, "crFragment")
 //                .commit()
         }
+//        sortFab.setOnClickListener {
+//            val sortBottomSheet = SortingFragment.newInstance(
+//                habitsModel,
+//                HabitType.Good
+//            )
+//            sortBottomSheet.show(getSupportFragmentManager(), "")
+//        }
         Log.d(TAG, "onCreate")
     }
 
