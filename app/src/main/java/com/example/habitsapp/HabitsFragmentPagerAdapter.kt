@@ -7,17 +7,13 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
 
-class HabitsFragmentPagerAdapter(
-    fm: FragmentManager,
-    private val context: Context,
-    private val habits: List<Habit>
-) : FragmentPagerAdapter(fm) {
+class HabitsFragmentPagerAdapter(fm: FragmentManager, private val context: Context) :
+    FragmentPagerAdapter(fm) {
 
     val TAG = "HFPagerAdapter"
 
     val PAGE_COUNT = 2
     private val tabTitles = arrayOf("Good", "Bad")
-//    private val colors = mapOf("Bad" to "#ffe1da", "Good" to "#daffdd")
     private val types = mapOf("Bad" to HabitType.Bad, "Good" to HabitType.Good)
 
     override fun getCount(): Int {
@@ -26,9 +22,9 @@ class HabitsFragmentPagerAdapter(
 
     override fun getItem(position: Int): Fragment {
         Log.d(TAG, "getItem")
-        val type = types[tabTitles[position]]?: HabitType.Neutral
-        val filtered = habits.filter { it.type==type }
-        return HabitsPageFragment.newInstance(type, filtered)
+        val type = types[tabTitles[position]] ?: HabitType.Neutral
+        val habitsModel = HabitsModel(context)
+        return HabitsPageFragment.newInstance(habitsModel, type)
     }
 
     override fun getPageTitle(position: Int): String {

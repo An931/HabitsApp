@@ -9,27 +9,31 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 
 
-class HabitsPageFragment(val type: HabitType, val habits: List<Habit>) : Fragment() {
+class HabitsPageFragment(private val habitsModel : HabitsModel, val type: HabitType) : Fragment() {
 
     val TAG = "PageFragment"
-    val RED = "#ffe1da"
-    val GREEN = "#daffdd"
 
+    private lateinit var viewModel: HabitsPageViewModel
 
     companion object {
-        fun newInstance(
-            type: HabitType,
-            habits: List<Habit>
-        ): HabitsPageFragment {
+        fun newInstance(habitsModel : HabitsModel, type: HabitType): HabitsPageFragment {
             Log.d("HabitsPageFragment", "newInstance")
-            return HabitsPageFragment(type, habits)
+            return HabitsPageFragment(habitsModel, type)
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(this, object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return HabitsPageViewModel(habitsModel, type) as T
+            }
+        }).get(HabitsPageViewModel::class.java)
         Log.d(TAG, "onCreate")
     }
 
@@ -41,22 +45,39 @@ class HabitsPageFragment(val type: HabitType, val habits: List<Habit>) : Fragmen
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.habits_page_fragment, container, false)
         val color = when (type) {
-            HabitType.Good -> GREEN
-            HabitType.Bad -> RED
-            HabitType.Neutral -> "White"
+            HabitType.Good -> "#daffdd"
+            HabitType.Bad -> "#ffe1da"
+            HabitType.Neutral -> "#fff"
         }
         view.setBackgroundColor(Color.parseColor(color))
-        val layout = view.findViewById<LinearLayout>(R.id.habitsLayout)
-        habits.forEach {
-            val view = it.getView(context ?: MainActivity())
-//            view.setOnClickListener {
-//
-//            }
-            layout.addView(view)
-        }
+
+//        val layout = view.findViewById<LinearLayout>(R.id.habitsLayout)
+//        habits.forEach {
+//            val view = it.getView(context ?: MainActivity())
+////            view.setOnClickListener {
+////
+////            }
+//            layout.addView(view)
+//        }
 
         Log.d(TAG, "onCreateView")
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+        val layout = view.findViewById<LinearLayout>(R.id.habitsLayout)
+        viewModel.habits.observe(this, Observer { habits ->
+            habits?.forEach {
+                val view = it.getView(context ?: MainActivity())
+//            view.setOnClickListener {
+//
+//            }
+                Log.d(TAG, "onViewCreated")
+                layout.addView(view)
+            }
+        })
+        Log.d(TAG, "onViewCreated")
     }
 }
 

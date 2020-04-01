@@ -38,9 +38,7 @@ class MainActivity : AppCompatActivity() {
             val vp = findViewById<ViewPager>(R.id.viewpager)
             vp.adapter = HabitsFragmentPagerAdapter(
                 supportFragmentManager,
-                this,
-                dbOpenHelper.getAllHabits()
-            )
+                this)
 
             val st = findViewById<TabLayout>(R.id.sliding_tabs)
             st.setupWithViewPager(vp)
