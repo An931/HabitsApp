@@ -10,9 +10,6 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.RadioButton
 import androidx.fragment.app.DialogFragment
-import kotlinx.android.synthetic.main.activity_habit.*
-import kotlinx.android.synthetic.main.activity_habit_creation.*
-import kotlinx.android.synthetic.main.activity_habit_creation.colorEdit
 import kotlinx.android.synthetic.main.fragment_creation_habit.*
 import kotlinx.android.synthetic.main.fragment_creation_habit.descriptionEdit
 import kotlinx.android.synthetic.main.fragment_creation_habit.nameEdit
