@@ -14,14 +14,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
 
-class HabitsPageFragment(private val habitsModel : HabitsModel, val type: HabitType) : Fragment() {
+class HabitsPageFragment(private val habitsModel: HabitsModel, val type: HabitType) : Fragment() {
 
     val TAG = "PageFragment"
 
     private lateinit var viewModel: HabitsPageViewModel
 
     companion object {
-        fun newInstance(habitsModel : HabitsModel, type: HabitType): HabitsPageFragment {
+        fun newInstance(habitsModel: HabitsModel, type: HabitType): HabitsPageFragment {
             Log.d("HabitsPageFragment", "newInstance")
             return HabitsPageFragment(habitsModel, type)
         }

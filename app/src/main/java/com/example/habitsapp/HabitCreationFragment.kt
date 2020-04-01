@@ -22,15 +22,16 @@ import kotlinx.android.synthetic.main.fragment_creation_habit.typeRadioGroup
 import kotlinx.android.synthetic.main.fragment_creation_habit.habitId
 
 
-class HabitCreationFragment(val callback:HabitCreationCallback, val habit: Habit? = null) : DialogFragment(){
+class HabitCreationFragment(private val habitsModel: HabitsModel, val habit: Habit? = null) : DialogFragment(){
 
+    private lateinit var viewModel: HabitCreationViewModel
 
     companion object{
-        fun newInstance(callback:HabitCreationCallback):HabitCreationFragment {
-            return HabitCreationFragment(callback)
+        fun newInstance(habitsModel: HabitsModel):HabitCreationFragment {
+            return HabitCreationFragment(habitsModel)
         }
-        fun newInstance(callback:HabitCreationCallback, habit: Habit):HabitCreationFragment {
-            return HabitCreationFragment(callback, habit)
+        fun newInstance(habitsModel: HabitsModel, habit: Habit):HabitCreationFragment {
+            return HabitCreationFragment(habitsModel, habit)
         }
     }
 
@@ -85,13 +86,13 @@ class HabitCreationFragment(val callback:HabitCreationCallback, val habit: Habit
                     color
                 )
                 habit.id = habitId.text.toString().toLong()
-                callback.onHabitSave(habit, context)
+                habitsModel.save(habit)
                 dismiss()
             }
         }
     }
 }
 
-interface HabitCreationCallback{
-    fun onHabitSave(habit: Habit, context:Context?)
-}
+//interface HabitCreationCallback{
+//    fun onHabitSave(habit: Habit, context:Context?)
+//}

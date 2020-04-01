@@ -4,7 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class HabitsPageViewModel(private val habitsModel : HabitsModel, private val type : HabitType) :ViewModel(){
+class HabitsPageViewModel(private val habitsModel: HabitsModel, private val type: HabitType) :
+    ViewModel() {
 
     private val mutableHabits: MutableLiveData<List<Habit>?> = MutableLiveData()
     //private val mutableIsDataLoading: MutableLiveData<Boolean?> = MutableLiveData()
