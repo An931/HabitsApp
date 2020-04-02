@@ -23,10 +23,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 import java.text.FieldPosition
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     val TAG = "MainActivity"
     val dbOpenHelper = DbOpenHelper(this)
     val habitsModel = HabitsModel(this)
+
+    private lateinit var navigationView: NavigationView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,7 +53,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
-
         val toggle = ActionBarDrawerToggle(
             this,
             drawer,
@@ -63,8 +64,8 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
 
-//        val navigationView: NavigationView = findViewById(R.id.nav_view)
-//        navigationView.setNavigationItemSelectedListener(this)
+        this.navigationView = findViewById(R.id.nav_view)
+        navigationView.setNavigationItemSelectedListener(this)
 
 
         fab.setOnClickListener {
@@ -76,6 +77,14 @@ class MainActivity : AppCompatActivity() {
 //                .commit()
         }
         Log.d(TAG, "onCreate")
+    }
+
+    override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
+        when(menuItem.itemId){
+            R.id.nav_item_about ->AboutAppFragment.newInstance().show(supportFragmentManager, "")
+            R.id.nav_item_home -> ""
+        }
+        return true
     }
 
 
