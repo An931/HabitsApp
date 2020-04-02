@@ -1,4 +1,6 @@
 package com.example.habitsapp
 
-class AboutAppFragment {
+import androidx.fragment.app.Fragment
+
+class AboutAppFragment : Fragment(){
 }

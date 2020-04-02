@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.habits_page_fragment.*
 
 
@@ -51,34 +52,26 @@ class HabitsPageFragment(private val habitsModel: HabitsModel, val type: HabitTy
             HabitType.Neutral -> "#fff"
         }
         view.setBackgroundColor(Color.parseColor(color))
-
-//        val layout = view.findViewById<LinearLayout>(R.id.habitsLayout)
-//        habits.forEach {
-//            val view = it.getView(context ?: MainActivity())
-////            view.setOnClickListener {
-////
-////            }
-//            layout.addView(view)
-//        }
-
         Log.d(TAG, "onCreateView")
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 //        super.onViewCreated(view, savedInstanceState)
-        val layout = view.findViewById<LinearLayout>(R.id.habitsLayout)
-        viewModel.habits.observe(this, Observer { habits ->
-            layout.removeAllViews()
-            habits?.forEach {
-                val view = it.getView(context ?: MainActivity())
-//            view.setOnClickListener {
-//
+//        val layout = view.findViewById<LinearLayout>(R.id.habitsLayout)
+//        viewModel.habits.observe(this, Observer { habits ->
+//            layout.removeAllViews()
+//            habits?.forEach {
+//                val view = it.getView(context ?: MainActivity())
+//                layout.addView(view)
 //            }
-//                Log.d(TAG, "onViewCreated")
-                layout.addView(view)
-            }
+//        })
+        recycler_view.layoutManager = LinearLayoutManager(this.activity)
+        viewModel.habits.observe(this, Observer { habits ->
+//            layout.removeAllViews()
+            recycler_view.adapter = RecyclerViewAdapter(viewModel.habits.value?: listOf())
         })
+
         search_button.setOnClickListener {
             val sortBottomSheet = SortingFragment.newInstance(viewModel, habitsModel, type)
             sortBottomSheet.show(fragmentManager, "")

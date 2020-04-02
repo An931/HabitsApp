@@ -75,32 +75,9 @@ class MainActivity : AppCompatActivity() {
 //                .add(R.id.creationFragment, creationFragment, "crFragment")
 //                .commit()
         }
-//        sortFab.setOnClickListener {
-//            val sortBottomSheet = SortingFragment.newInstance(
-//                habitsModel,
-//                HabitType.Good
-//            )
-//            sortBottomSheet.show(getSupportFragmentManager(), "")
-//        }
         Log.d(TAG, "onCreate")
     }
 
-//    val callback = object : HabitCreationCallback {
-////        override fun onHabitSave(habit: Habit, context: Context?) {
-////            dbOpenHelper.addToDB(habit)
-////            Log.d("HabCreateFragment", "onHabSave")
-////            //add to other
-////            var tag =   "android:switcher:" + R.id.viewpager + ":"
-////            if (habit.type == HabitType.Good)
-////                tag += 0
-////            else
-////                tag += 1
-////            val fragment =supportFragmentManager.findFragmentByTag(tag);
-////            val l = fragment?.view?.findViewById<LinearLayout>(R.id.habitsLayout)
-////            val v = habit.getView(context)
-////            l?.addView(v, 0)
-////        }
-////    }
 
     fun showHabitCreationFragment() {
         val creationFragment = HabitCreationFragment.newInstance(habitsModel)
