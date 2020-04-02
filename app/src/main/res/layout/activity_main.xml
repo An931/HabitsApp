@@ -7,36 +7,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cardview_light_background"
+    android:theme="@android:style/Theme.NoTitleBar"
     tools:context=".MainActivity"
-    tools:openDrawer="start"
-    android:theme="@android:style/Theme.NoTitleBar">
-
-<!--    <include-->
-<!--        layout="@layout/app_bar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent" />-->
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/cardview_dark_background">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar_main"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </com.google.android.material.appbar.AppBarLayout>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_drawer"/>
+    tools:openDrawer="start">
 
     <LinearLayout
         android:id="@+id/habitsLayout"
@@ -56,21 +29,40 @@
             android:layout_height="10dp"
             android:layout_weight="1"
             android:background="@android:color/background_dark" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            style="@style/CardView.Dark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin"
-            app:backgroundTint="#673AB7" />
-
-
-<!--        <FrameLayout-->
-<!--            android:id="@+id/sfc"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="200dp">-->
-<!--        </FrameLayout>-->
     </LinearLayout>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/cardview_dark_background">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.appbar.AppBarLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer" />
+
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        style="@style/CardView.Dark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:backgroundTint="#673AB7" />
 </androidx.drawerlayout.widget.DrawerLayout>

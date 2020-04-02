@@ -31,11 +31,14 @@
         android:id="@+id/search_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="search"
+        android:text="🔍"
         android:background="#56A3B8"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        style="@style/CardView.Dark"
+        android:layout_margin="@dimen/fab_margin" />
 
     <FrameLayout
         android:id="@+id/sorting_fragment_container"

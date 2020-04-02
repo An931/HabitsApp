@@ -44,14 +44,8 @@ class MainActivity : AppCompatActivity() {
 
             val st = findViewById<TabLayout>(R.id.sliding_tabs)
             st.setupWithViewPager(vp)
-
-
-//            val sortBottomSheet = SortingFragment(habitsModel, HabitType.Good)
-//            val transaction = getSupportFragmentManager().beginTransaction()
-//            transaction?.add(R.id.sfc, sortBottomSheet).commit()
-//            val sortBottomSheet = SortingFragment.newInstance(habitsModel, HabitType.Good)
-//            sortBottomSheet.show(getSupportFragmentManager(), "")
         }
+
 
         val toolbar: Toolbar = findViewById(R.id.toolbar_main)
         setSupportActionBar(toolbar)

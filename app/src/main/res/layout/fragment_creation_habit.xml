@@ -20,12 +20,12 @@
         android:id="@+id/habitId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="-1"
         android:visibility="gone"
-        android:layout_gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/nameEdit"
@@ -36,7 +36,7 @@
         android:hint="название"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/descriptionEdit"
@@ -55,8 +55,7 @@
         android:prompt="@string/priority_prompt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionEdit">
-    </Spinner>
+        app:layout_constraintTop_toBottomOf="@+id/descriptionEdit"></Spinner>
 
     <RadioGroup
         android:id="@+id/typeRadioGroup"
@@ -65,26 +64,25 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prioritySpinner" >
+        app:layout_constraintTop_toBottomOf="@+id/prioritySpinner">
 
         <RadioButton
             android:id="@+id/radio_good"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Good"
-            android:checked="true"
             android:layout_marginLeft="24dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="Good" />
 
         <RadioButton
             android:id="@+id/radio_bad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Bad"
             android:layout_marginLeft="24dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="Bad" />
     </RadioGroup>
-
 
     <EditText
         android:id="@+id/periodicityEdit"
@@ -105,6 +103,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/periodicityEdit">
+
     </Spinner>
 
 
@@ -115,23 +114,23 @@
         android:layout_marginTop="32dp"
         android:background="@color/colorAccent"
         android:text="Save"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/textView2"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="32dp"-->
-<!--        android:fontFamily="sans-serif-condensed"-->
-<!--        android:gravity="center"-->
-<!--        android:text="This is a full screen dialog example "-->
-<!--        android:textAllCaps="true"-->
-<!--        android:textSize="22sp"-->
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/textView2"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="32dp"-->
+    <!--        android:fontFamily="sans-serif-condensed"-->
+    <!--        android:gravity="center"-->
+    <!--        android:text="This is a full screen dialog example "-->
+    <!--        android:textAllCaps="true"-->
+    <!--        android:textSize="22sp"-->
+    <!--        android:textStyle="bold"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
 
