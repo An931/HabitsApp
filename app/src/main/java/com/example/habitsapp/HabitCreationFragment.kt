@@ -102,6 +102,9 @@ class HabitCreationFragment(private val habitsModel: HabitsModel, val habit: Hab
                 dismiss()
             }
         }
+//        backButton.setOnClickListener{
+//            this.activity?.onBackPressed()
+//        }
     }
 }
 

@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 //        fillDataBase()
-//        dbOpenHelper.cleanDb()
+        dbOpenHelper.cleanDb()
 
         if (savedInstanceState == null) {
             val vp = findViewById<ViewPager>(R.id.viewpager)

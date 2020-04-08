@@ -9,7 +9,8 @@ class HabitsModel(val context: Context) {
 
     val dbOpenHelper = DbOpenHelper(context)
 
-    val habitsChanged = MutableLiveData<Boolean?>()
+//    val habitsChanged = MutableLiveData<Boolean?>()
+    val changedHabits = MutableLiveData<List<Habit>?>()
 
     fun getHabits(): List<Habit> {
         return dbOpenHelper.getAllHabits()
@@ -45,8 +46,9 @@ class HabitsModel(val context: Context) {
 
 
     fun save(habit: Habit) {
-        habitsChanged.postValue(true)
         dbOpenHelper.addToDB(habit)
+//        habitsChanged.postValue(true)
+        changedHabits.postValue(dbOpenHelper.getAllHabits())
     }
 }
 

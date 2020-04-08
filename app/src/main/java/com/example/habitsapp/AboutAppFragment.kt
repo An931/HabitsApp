@@ -33,4 +33,8 @@ class AboutAppFragment : DialogFragment(){
 //        view.setBackgroundColor(Color.parseColor(color))
         return view
     }
+
+//    override fun getTheme(): Int {
+//        return R.style.HabitCreateTheme
+//    }
 }

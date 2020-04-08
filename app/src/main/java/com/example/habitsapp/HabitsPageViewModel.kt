@@ -17,11 +17,14 @@ class HabitsPageViewModel(private val habitsModel: HabitsModel, private val type
 
     init {
         load()
-        habitsModel.habitsChanged.observeForever( Observer{
-            if (habitsModel.habitsChanged.value == true){
-                load()
-                habitsModel.habitsChanged.value = false
-            }
+//        habitsModel.habitsChanged.observeForever( Observer{
+//            if (habitsModel.habitsChanged.value == true){
+//                load()
+//                habitsModel.habitsChanged.value = false
+//            }
+//        })
+        habitsModel.changedHabits.observeForever(Observer {
+            load()
         })
     }
 
@@ -39,26 +42,3 @@ class HabitsPageViewModel(private val habitsModel: HabitsModel, private val type
         mutableHabits.postValue(habitsModel.getHabits(type, nameStr, sorting))
     }
 }
-//class ProfileViewModel(private val model: Model, private val profileId: String) : ViewModel() {
-//
-//    private val mutableProfile: MutableLiveData<Profile?> = MutableLiveData()
-//    private val mutableIsDataLoading: MutableLiveData<Boolean?> = MutableLiveData()
-//
-//    val profile: LiveData<Profile?> = mutableProfile
-//    val isDataLoading: LiveData<Boolean?> = mutableIsDataLoading
-//
-//    init {
-//        load()
-//    }
-//
-//    private fun load() {
-//
-//        mutableIsDataLoading.value = true
-//
-//        model.loadProfileAsync(profileId) { loadedProfile: Profile ->
-//            mutableIsDataLoading.postValue(false)
-//            mutableProfile.postValue(loadedProfile)
-//
-//        }
-//    }
-//}
