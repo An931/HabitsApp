@@ -61,8 +61,8 @@ class HabitCreationFragment(private val habitsModel: HabitsModel, val habit: Hab
             descriptionEdit.setText(habit.descriptor)
             prioritySpinner.setSelection(habit.priority-1)
             when(habit.type){
-                HabitType.Good -> radio_good.isChecked = true
-                HabitType.Bad-> radio_bad.isChecked=true
+                HabitType.Good.toString() -> radio_good.isChecked = true
+                HabitType.Bad.toString()-> radio_bad.isChecked=true
             }
             periodicityEdit.setText(habit.periodicity)
             habitId.text = habit.id.toString()
@@ -93,11 +93,10 @@ class HabitCreationFragment(private val habitsModel: HabitsModel, val habit: Hab
                     name,
                     description,
                     priority.toInt(),
-                    HabitType.valueOf(type),
+                    type,
                     periodicity,
                     color
                 )
-                habit.id = habitId.text.toString().toLong()
                 viewModel.save(habit)
                 dismiss()
             }

@@ -16,6 +16,9 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
@@ -25,17 +28,29 @@ import java.text.FieldPosition
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     val TAG = "MainActivity"
-    val dbOpenHelper = DbOpenHelper(this)
-    val habitsModel = HabitsModel(this)
+
+//    val dbOpenHelper = DbOpenHelper(this)
+
+
+//    val habitsModel = HabitsModel(db)
+
 
     private lateinit var navigationView: NavigationView
+    private lateinit var habitsModel:HabitsModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 //        fillDataBase()
-        dbOpenHelper.cleanDb()
+//        dbOpenHelper.cleanDb()
+
+        val db = Room.databaseBuilder(
+            this,
+            AppDatabase::class.java, "habit"
+        ).allowMainThreadQueries().build()
+        habitsModel = HabitsModel(db.habitDao())
+
 
         if (savedInstanceState == null) {
             val vp = findViewById<ViewPager>(R.id.viewpager)
@@ -95,9 +110,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
     private fun fillDataBase() {
-        dbOpenHelper.addToDB(Habit("n1", "des", 3, HabitType.Good, "e", "black"))
-        dbOpenHelper.addToDB(Habit("n2", "des", 6, HabitType.Bad, "e", "black"))
+//        db.habitDao().insertAll(
+//            Habit("k", "j", 3, HabitType.Good, "j", "white")
+//        )
+//        dbOpenHelper.addToDB(Habit("n1", "des", 3, HabitType.Good, "e", "black"))
+//        dbOpenHelper.addToDB(Habit("n2", "des", 6, HabitType.Bad, "e", "black"))
 
     }
 
 }
+
+

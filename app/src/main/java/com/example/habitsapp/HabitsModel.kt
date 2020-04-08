@@ -2,24 +2,17 @@ package com.example.habitsapp
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
+import androidx.room.Room
 
-class HabitsModel(val context: Context) {
+class HabitsModel(val habitDB:HabitDao) {
 
-    //make singleton
 
-    val dbOpenHelper = DbOpenHelper(context)
-
-//    val habitsChanged = MutableLiveData<Boolean?>()
     val changedHabits = MutableLiveData<List<Habit>?>()
 
     fun getHabits(): List<Habit> {
-        return dbOpenHelper.getAllHabits()
+        return habitDB.getAll()
     }
 
-//    fun getHabits(type: HabitType): List<Habit> {
-//        //делать через запроос SQL
-//        return dbOpenHelper.getAllHabits().filter { it.type == type }.toList()
-//    }
 
     fun getHabits(
         type: HabitType,
@@ -29,8 +22,8 @@ class HabitsModel(val context: Context) {
 
         //делать через запроос SQL
 
-        var habits = dbOpenHelper.getAllHabits().filter {
-            it.type == type && it.name.contains(nameStr)
+        var habits = habitDB.getAll().filter {
+            it.type == type.toString() && it.name.contains(nameStr)
         }
         when (sorting.sortBy) {
             SortBy.NAME -> habits = habits.sortedBy { it.name }
@@ -46,9 +39,8 @@ class HabitsModel(val context: Context) {
 
 
     fun save(habit: Habit) {
-        dbOpenHelper.addToDB(habit)
-//        habitsChanged.postValue(true)
-        changedHabits.postValue(dbOpenHelper.getAllHabits())
+        habitDB.insert(habit)
+        changedHabits.postValue(habitDB.getAll())
     }
 }
 
