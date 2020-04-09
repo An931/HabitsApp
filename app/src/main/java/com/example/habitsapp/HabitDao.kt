@@ -5,11 +5,12 @@ import androidx.room.*
 
 @Dao
 interface HabitDao {
-    @Query("SELECT * FROM habit")
-    fun getAll(): List<Habit>
 
-//    @Query("SELECT * FROM habit WHERE type = :type")
-//    fun getAllByType(type:HabitType): List<Habit>
+    @Query("SELECT * FROM habit")
+    fun getAll(): LiveData<List<Habit>>
+
+//    @Query("SELECT * FROM habit WHERE type = :type") //how enum
+//    fun getAllByType(type:String): List<Habit>
 
 
 //    @Query("SELECT * FROM habit WHERE id IN (:habitIds)")
@@ -26,6 +27,9 @@ interface HabitDao {
 
     @Delete
     fun delete(habit: Habit)
+
+    @Query("DELETE FROM habit")
+    fun deleteAll()
 }
 
 @Database(entities = arrayOf(Habit::class), version = 1)

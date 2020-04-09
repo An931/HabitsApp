@@ -6,41 +6,62 @@ import androidx.room.Room
 
 class HabitsModel(val habitDB:HabitDao) {
 
-
-    val changedHabits = MutableLiveData<List<Habit>?>()
-
-    fun getHabits(): List<Habit> {
-        return habitDB.getAll()
+    fun getHabits(): List<Habit>? {
+        return habitDB.getAll().value
     }
 
 
     fun getHabits(
+        habits: List<Habit>?,
         type: HabitType,
         nameStr: String = "",
         sorting: SortingParameter = SortingParameter(SortBy.PRIORITY, SortOrder.ASCENDING)
-    ): List<Habit> {
+    ): List<Habit>? {
 
         //делать через запроос SQL
 
-        var habits = habitDB.getAll().filter {
+        var habits = habits?.filter { //why null
             it.type == type.toString() && it.name.contains(nameStr)
         }
         when (sorting.sortBy) {
-            SortBy.NAME -> habits = habits.sortedBy { it.name }
+            SortBy.NAME -> habits = habits?.sortedBy { it.name }
             SortBy.PRIORITY -> habits =
-                habits.sortedWith(compareBy<Habit> { it.priority }.thenBy { it.name })
+                habits?.sortedWith(compareBy<Habit> { it.priority }.thenBy { it.name })
 //            SortBy.TIME -> habits = habits.sortedBy { it.name }
         }
         if (sorting.order == SortOrder.DESCENDING)
-            habits = habits.reversed()
+            habits = habits?.reversed()
 
         return habits
     }
 
 
+//    fun getHabits(
+//        type: HabitType,
+//        nameStr: String = "",
+//        sorting: SortingParameter = SortingParameter(SortBy.PRIORITY, SortOrder.ASCENDING)
+//    ): List<Habit>? {
+//
+//        //делать через запроос SQL
+//
+//        var habits = habitDB.getAll().value?.filter { //why null
+//            it.type == type.toString() && it.name.contains(nameStr)
+//        }
+//        when (sorting.sortBy) {
+//            SortBy.NAME -> habits = habits?.sortedBy { it.name }
+//            SortBy.PRIORITY -> habits =
+//                habits?.sortedWith(compareBy<Habit> { it.priority }.thenBy { it.name })
+////            SortBy.TIME -> habits = habits.sortedBy { it.name }
+//        }
+//        if (sorting.order == SortOrder.DESCENDING)
+//            habits = habits?.reversed()
+//
+//        return habits
+//    }
+
+
     fun save(habit: Habit) {
         habitDB.insert(habit)
-        changedHabits.postValue(habitDB.getAll())
     }
 }
 

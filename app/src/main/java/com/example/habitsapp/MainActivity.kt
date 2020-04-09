@@ -29,12 +29,6 @@ import java.text.FieldPosition
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     val TAG = "MainActivity"
 
-//    val dbOpenHelper = DbOpenHelper(this)
-
-
-//    val habitsModel = HabitsModel(db)
-
-
     private lateinit var navigationView: NavigationView
     private lateinit var habitsModel:HabitsModel
 

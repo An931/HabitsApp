@@ -16,29 +16,33 @@ class HabitsPageViewModel(private val habitsModel: HabitsModel, private val type
     //val isDataLoading: LiveData<Boolean?> = mutableIsDataLoading
 
     init {
-        load()
+//        load()
 //        habitsModel.habitsChanged.observeForever( Observer{
 //            if (habitsModel.habitsChanged.value == true){
 //                load()
 //                habitsModel.habitsChanged.value = false
 //            }
 //        })
-        habitsModel.changedHabits.observeForever(Observer {
-            load()
+
+        habitsModel.habitDB.getAll().observeForever(Observer {
+            mutableHabits.postValue(it.filter { it.type == type.toString() })
         })
+//        habitsModel.changedHabits.observeForever(Observer {
+//            load()
+//        })
     }
 
-    private fun load() {
+//    private fun load() {
         //mutableIsDataLoading.value = true
-
 //        model.loadProfileAsync(profileId) { loadedProfile: Profile ->
 //            mutableIsDataLoading.postValue(false)
 //            mutableProfile.postValue(loadedProfile)
 //        }
-        mutableHabits.postValue(habitsModel.getHabits(type))
-    }
+//        mutableHabits.postValue(habitsModel.habitDB.getAll().value)
+//        mutableHabits.postValue(habitsModel.getHabits(type))
+//    }
 
     fun changeSorting(nameStr: String, sorting: SortingParameter){
-        mutableHabits.postValue(habitsModel.getHabits(type, nameStr, sorting))
+        mutableHabits.postValue(habitsModel.getHabits(mutableHabits.value, type, nameStr, sorting))
     }
 }
