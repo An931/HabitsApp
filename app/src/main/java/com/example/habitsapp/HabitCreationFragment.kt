@@ -32,7 +32,7 @@ class HabitCreationFragment(private val habitsModel: HabitsModel, val habit: Hab
         fun newInstance(habitsModel: HabitsModel):HabitCreationFragment {
             return HabitCreationFragment(habitsModel)
         }
-        fun newInstance(habitsModel: HabitsModel, habit: Habit):HabitCreationFragment {
+        fun newInstance(habitsModel: HabitsModel, habit: Habit?):HabitCreationFragment {
             return HabitCreationFragment(habitsModel, habit)
         }
     }
@@ -55,6 +55,15 @@ class HabitCreationFragment(private val habitsModel: HabitsModel, val habit: Hab
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_creation_habit, container, false)
+        return view
+    }
+
+    override fun getTheme(): Int {
+        return R.style.HabitCreateTheme
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         if (habit != null){
             nameEdit.setText( habit.name)
@@ -68,42 +77,36 @@ class HabitCreationFragment(private val habitsModel: HabitsModel, val habit: Hab
             habitId.text = habit.id.toString()
         }
 
-        return view
-    }
-
-    override fun getTheme(): Int {
-        return R.style.HabitCreateTheme
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         saveHabitButton.setOnClickListener{
-            if (!(nameEdit.text.isEmpty()
-                        || descriptionEdit.text.isEmpty()
-                        || periodicityEdit.text.isEmpty())
-            ) {
-                val name = nameEdit.text.toString()
-                val description = descriptionEdit.text.toString()
-                val priority = prioritySpinner.selectedItem.toString()
-                val type = getView()?.findViewById<RadioButton>(typeRadioGroup.checkedRadioButtonId)
-                    ?.text.toString()
-                val periodicity = periodicityEdit.text.toString()
-                val color = colorSpinner.selectedItem.toString()
-                val habit = Habit(
-                    name,
-                    description,
-                    priority.toInt(),
-                    type,
-                    periodicity,
-                    color
-                )
-                viewModel.save(habit)
-                dismiss()
-            }
+            saveHabitIfFill()
+            dismiss()
         }
-//        backButton.setOnClickListener{
-//            this.activity?.onBackPressed()
-//        }
+
+    }
+
+    fun saveHabitIfFill(){
+        if (!(nameEdit.text.isEmpty()
+                    || descriptionEdit.text.isEmpty()
+                    || periodicityEdit.text.isEmpty())
+        ) {
+            val name = nameEdit.text.toString()
+            val description = descriptionEdit.text.toString()
+            val priority = prioritySpinner.selectedItem.toString()
+            val type = getView()?.findViewById<RadioButton>(typeRadioGroup.checkedRadioButtonId)
+                ?.text.toString()
+            val periodicity = periodicityEdit.text.toString()
+            val color = colorSpinner.selectedItem.toString()
+            val habit = Habit(
+                name,
+                description,
+                priority.toInt(),
+                type,
+                periodicity,
+                color
+            )
+            habit.id = habitId.text.toString().toInt()
+            viewModel.save(habit)
+        }
     }
 }
 

@@ -1,13 +1,11 @@
 package com.example.habitsapp
 
-import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -68,9 +66,19 @@ class HabitsPageFragment(private val habitsModel: HabitsModel, val type: HabitTy
 //        })
         recycler_view.layoutManager = LinearLayoutManager(this.activity)
         viewModel.habits.observe(this, Observer { habits ->
-//            layout.removeAllViews()
-            recycler_view.adapter = RecyclerViewAdapter(viewModel.habits.value?: listOf())
+            //            layout.removeAllViews()
+            recycler_view.adapter = RecyclerViewAdapter(
+                viewModel.habits.value ?: listOf(),
+                (activity as MainActivity).showHabitCreationFragment
+            )
         })
+
+//        recycler_view.addOnItemTouchListener(
+//            RecyclerItemMotionListener(
+//                fragmentManager,
+//                habitsModel
+//            )
+//        )
 
         search_button.setOnClickListener {
             val sortBottomSheet = SortingFragment.newInstance(viewModel, habitsModel, type)
@@ -89,5 +97,22 @@ class HabitsPageFragment(private val habitsModel: HabitsModel, val type: HabitTy
 
         Log.d(TAG, "onViewCreated")
     }
+
 }
 
+//class RecyclerItemMotionListener(
+//    val fragmentManager: FragmentManager?,
+//    val habitsModel: HabitsModel
+//) : RecyclerView.OnItemTouchListener {
+//    override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
+//        val creationFragment = HabitCreationFragment.newInstance(habitsModel)
+//        creationFragment.show(fragmentManager, "t")
+//    }
+//
+//    override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
+//        return true
+//    }
+//
+//    override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
+//    }
+//}

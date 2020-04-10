@@ -61,7 +61,12 @@ class HabitsModel(val habitDB:HabitDao) {
 
 
     fun save(habit: Habit) {
-        habitDB.insert(habit)
+        if (habit.id == -1)
+            habitDB.insert(habit)
+        else{
+            habitDB.update(habit)
+        }
+
     }
 }
 

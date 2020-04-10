@@ -19,6 +19,9 @@ interface HabitDao {
 //    @Query("SELECT * FROM habit WHERE title LIKE :title LIMIT 1")
 //    fun findByTitle(title: String): Feed
 
+    @Update
+    fun update(habit: Habit)
+
     @Insert
     fun insert(habit: Habit)
 

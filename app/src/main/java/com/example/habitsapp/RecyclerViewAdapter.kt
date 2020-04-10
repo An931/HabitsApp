@@ -3,11 +3,11 @@ package com.example.habitsapp
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class RecyclerViewAdapter(private val values: List<Habit>) :
+class RecyclerViewAdapter(private val values: List<Habit>, val onClick: (Habit)->Unit) :
     RecyclerView.Adapter<ViewHolder>() {
     override fun getItemCount(): Int {
         return values.size
@@ -24,6 +24,9 @@ class RecyclerViewAdapter(private val values: List<Habit>) :
         holder.descriptionTextView.text = values[position].descriptor
         holder.priorityTextView.text = values[position].priority.toString()
         holder.periodicityTextView.text = values[position].periodicity
+        holder.changeButton.setOnClickListener {
+            onClick(values[position])
+        }
     }
 }
 
@@ -32,5 +35,5 @@ class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val descriptionTextView = itemView.findViewById<TextView>(R.id.description)
     val priorityTextView = itemView.findViewById<TextView>(R.id.priority)
     val periodicityTextView = itemView.findViewById<TextView>(R.id.periodicity)
-
+    val changeButton = itemView.findViewById<Button>(R.id.changeButton)
 }

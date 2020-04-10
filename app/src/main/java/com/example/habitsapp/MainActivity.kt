@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     val TAG = "MainActivity"
 
     private lateinit var navigationView: NavigationView
-    private lateinit var habitsModel:HabitsModel
+    private lateinit var habitsModel: HabitsModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         fab.setOnClickListener {
             Log.d(TAG, "toCreateButton")
-            showHabitCreationFragment()
+            showHabitCreationFragment(null)
 //            supportFragmentManager
 //                .beginTransaction()
 //                .add(R.id.creationFragment, creationFragment, "crFragment")
@@ -89,18 +89,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
-        when(menuItem.itemId){
-            R.id.nav_item_about ->AboutAppFragment.newInstance().show(supportFragmentManager, "")
+        when (menuItem.itemId) {
+            R.id.nav_item_about -> AboutAppFragment.newInstance().show(supportFragmentManager, "")
             R.id.nav_item_home -> ""
         }
         return true
     }
 
+    var showHabitCreationFragment = { habit: Habit? ->
 
-    fun showHabitCreationFragment() {
-        val creationFragment = HabitCreationFragment.newInstance(habitsModel)
+        val creationFragment = HabitCreationFragment.newInstance(habitsModel, habit)
         creationFragment.show(supportFragmentManager, "t")
+
+
     }
+
+//    fun showHabitCreationFragment(habit: Habit?=null) {
+//
+//    }
 
 
     private fun fillDataBase() {
