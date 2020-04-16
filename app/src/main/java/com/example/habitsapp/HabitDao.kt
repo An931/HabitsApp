@@ -9,6 +9,10 @@ interface HabitDao {
     @Query("SELECT * FROM habit")
     fun getAll(): LiveData<List<Habit>>
 
+    @Query("SELECT * FROM habit")
+    fun getAllFrozenData(): List<Habit>
+
+
 //    @Query("SELECT * FROM habit WHERE type = :type") //how enum
 //    fun getAllByType(type:String): List<Habit>
 

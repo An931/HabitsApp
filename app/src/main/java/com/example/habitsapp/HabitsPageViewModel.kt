@@ -10,39 +10,21 @@ class HabitsPageViewModel(private val habitsModel: HabitsModel, private val type
 
 
     private val mutableHabits: MutableLiveData<List<Habit>?> = MutableLiveData()
-    //private val mutableIsDataLoading: MutableLiveData<Boolean?> = MutableLiveData()
-
     val habits: LiveData<List<Habit>?> = mutableHabits
-    //val isDataLoading: LiveData<Boolean?> = mutableIsDataLoading
+
+    var sorting :SortingParameter = SortingParameter(SortBy.PRIORITY, SortOrder.ASCENDING)
 
     init {
-//        load()
-//        habitsModel.habitsChanged.observeForever( Observer{
-//            if (habitsModel.habitsChanged.value == true){
-//                load()
-//                habitsModel.habitsChanged.value = false
-//            }
-//        })
-
         habitsModel.habitDB.getAll().observeForever(Observer {
-            mutableHabits.postValue(it.filter { it.type == type.toString() })
+//            mutableHabits.postValue(it.filter { it.type == type.toString() })
+            mutableHabits.postValue(habitsModel.getHabits(it, type, "", sorting))
         })
-//        habitsModel.changedHabits.observeForever(Observer {
-//            load()
-//        })
     }
 
-//    private fun load() {
-        //mutableIsDataLoading.value = true
-//        model.loadProfileAsync(profileId) { loadedProfile: Profile ->
-//            mutableIsDataLoading.postValue(false)
-//            mutableProfile.postValue(loadedProfile)
-//        }
-//        mutableHabits.postValue(habitsModel.habitDB.getAll().value)
-//        mutableHabits.postValue(habitsModel.getHabits(type))
-//    }
 
-    fun changeSorting(nameStr: String, sorting: SortingParameter){
-        mutableHabits.postValue(habitsModel.getHabits(mutableHabits.value, type, nameStr, sorting))
+    fun changeSorting(nameStr: String, newSorting: SortingParameter){
+        sorting = newSorting
+        val allHabits = habitsModel.habitDB.getAllFrozenData()
+        mutableHabits.postValue(habitsModel.getHabits(allHabits, type, nameStr, newSorting))
     }
 }
