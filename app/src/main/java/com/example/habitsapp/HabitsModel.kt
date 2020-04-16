@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.room.Room
 
-class HabitsModel(val habitDB:HabitDao) {
+class HabitsModel(val habitDB: HabitDao) {
 
     fun getHabits(): List<Habit>? {
         return habitDB.getAll().value
@@ -20,7 +20,8 @@ class HabitsModel(val habitDB:HabitDao) {
 
         //делать через запроос SQL
 
-        var habits = habits?.filter { //why null
+        var habits = habits?.filter {
+            //why null
             it.type == type.toString() && it.name.contains(nameStr)
         }
         when (sorting.sortBy) {
@@ -61,9 +62,10 @@ class HabitsModel(val habitDB:HabitDao) {
 
 
     fun save(habit: Habit) {
-        if (habit.id == -1)
-            habitDB.insert(habit)
-        else{
+        if (habit.id == Habit.INVALID_ID)
+//            habitDB.insert(habit)
+            habitDB.insert(Habit(habit.name, habit.descriptor, habit.priority, habit.type, habit.periodicity, habit.color))
+        else {
             habitDB.update(habit)
         }
 

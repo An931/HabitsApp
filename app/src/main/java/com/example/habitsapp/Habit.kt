@@ -13,7 +13,9 @@ data class Habit(
     @ColumnInfo var periodicity: String,
     @ColumnInfo var color: String
 ) {
-    //    var id :Long = -1
+    companion object{
+        val INVALID_ID = -123
+    }
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
 }
