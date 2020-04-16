@@ -104,7 +104,9 @@ class HabitCreationFragment(private val habitsModel: HabitsModel, val habit: Hab
                 periodicity,
                 color
             )
-            habit.id = habitId.text.toString().toInt()
+//            habit.id = habitId.text.toString().toInt()
+            if (habitId.text.toString().toInt() != Habit.INVALID_ID)
+                habit.id = habitId.text.toString().toInt()
             viewModel.save(habit)
         }
     }

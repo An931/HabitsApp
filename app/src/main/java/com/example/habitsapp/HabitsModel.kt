@@ -4,7 +4,14 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.room.Room
 
-class HabitsModel(val habitDB: HabitDao) {
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
+
+class HabitsModel(val habitDB: HabitDao) : CoroutineScope {
+
+    private val job = SupervisorJob()
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job + CoroutineExceptionHandler { _, e -> throw e }
 
     fun getHabits(): List<Habit>? {
         return habitDB.getAll().value
@@ -36,39 +43,24 @@ class HabitsModel(val habitDB: HabitDao) {
         return habits
     }
 
-
-//    fun getHabits(
-//        type: HabitType,
-//        nameStr: String = "",
-//        sorting: SortingParameter = SortingParameter(SortBy.PRIORITY, SortOrder.ASCENDING)
-//    ): List<Habit>? {
-//
-//        //делать через запроос SQL
-//
-//        var habits = habitDB.getAll().value?.filter { //why null
-//            it.type == type.toString() && it.name.contains(nameStr)
+//    fun save(habit: Habit) {
+//        if (habit.id == Habit.INVALID_ID) {
+//            habitDB.insert(habit)
 //        }
-//        when (sorting.sortBy) {
-//            SortBy.NAME -> habits = habits?.sortedBy { it.name }
-//            SortBy.PRIORITY -> habits =
-//                habits?.sortedWith(compareBy<Habit> { it.priority }.thenBy { it.name })
-////            SortBy.TIME -> habits = habits.sortedBy { it.name }
+//        else {
+//            habitDB.update(habit)
 //        }
-//        if (sorting.order == SortOrder.DESCENDING)
-//            habits = habits?.reversed()
 //
-//        return habits
 //    }
 
-
-    fun save(habit: Habit) {
-        if (habit.id == Habit.INVALID_ID)
-//            habitDB.insert(habit)
-            habitDB.insert(Habit(habit.name, habit.descriptor, habit.priority, habit.type, habit.periodicity, habit.color))
+    fun save(habit: Habit) = launch {
+        if (habit.id == 0)
+            withContext(Dispatchers.IO) {
+                habitDB.insert(habit)
+            }
         else {
-            habitDB.update(habit)
+            withContext(Dispatchers.IO) { habitDB.update(habit) }
         }
-
     }
 }
 

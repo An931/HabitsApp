@@ -14,7 +14,7 @@ data class Habit(
     @ColumnInfo var color: String
 ) {
     companion object{
-        val INVALID_ID = -123
+        val INVALID_ID = -127
     }
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
