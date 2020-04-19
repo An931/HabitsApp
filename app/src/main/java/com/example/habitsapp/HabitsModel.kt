@@ -56,6 +56,7 @@ class HabitsModel(val habitDB: HabitDao) : CoroutineScope {
     fun save(habit: Habit) = launch {
         if (habit.id == 0)
             withContext(Dispatchers.IO) {
+                delay(2000)
                 habitDB.insert(habit)
             }
         else {
